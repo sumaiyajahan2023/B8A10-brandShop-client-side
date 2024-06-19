@@ -1,14 +1,15 @@
-import './App.css'
+import { Outlet } from 'react-router-dom'
+import Header from './layout/Header'
+import Footer from './layout/Footer'
 
 function App() {
 
   return (
-    <>
-      <h1>Practise</h1>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div className='min-h-screen'>
+      <Header />
+      <Outlet />
+      <Footer />
+    </div>
   )
 }
 
