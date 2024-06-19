@@ -10,7 +10,7 @@ export default function AddProduct() {
     const name = formData.get("name");
     const description = formData.get("description");
     const rating = formData.get("rating");
-    const userInfo = {
+    const product = {
       name,
       imageUrl,
       brandName,
@@ -18,15 +18,27 @@ export default function AddProduct() {
       description,
       rating,
     };
-    console.log(userInfo);
-    e.target.reset();
+
+    fetch("http://localhost:5000/products", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(product),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data)
+        e.target.reset();
+      });
+    
   };
   return (
     <div className="hero min-h-screen  bg-base-200">
       <div className="hero-content w-full flex-col lg:flex-row-reverse">
         <div className="card w-full shadow-2xl bg-base-100">
           <form onSubmit={handleSubmit} className="card-body">
-          <div className="form-control">
+            <div className="form-control">
               <label className="label">
                 <span className="label-text">Image</span>
               </label>
