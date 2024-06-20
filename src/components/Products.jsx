@@ -27,8 +27,8 @@ export default function Products() {
       <div className="grid grid-cols-3 gap-3 py-5">
         {products.map((product, index) => (
           <div className="card w-96 bg-base-100 shadow-xl" key={index}>
-            <figure>
-              <img src={product.imageUrl} alt={product.name} />
+            <figure className="h-2/3">
+              <img src={product.imageUrl} alt={product.name} className="h-full" />
             </figure>
             <div className="card-body">
               <h2 className="card-title">

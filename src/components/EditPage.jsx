@@ -2,9 +2,9 @@ import React from "react";
 import { useLoaderData, useNavigate } from "react-router-dom";
 
 export default function EditPage({ params }) {
+  const navigate = useNavigate();
   const { _id, name, imageUrl, brandName, price, description, rating } =
     useLoaderData();
-  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();

@@ -1,33 +1,43 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import React, { useContext } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
+import { AuthContext } from "../providers/AuthProvider";
 
 export default function SignUp() {
-  const handleSubmit = e => {
+  const navigate = useNavigate();
+  const { createUser } = useContext(AuthContext);
+  // console.log(userInfo)
+
+  const handleSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
-    const email = formData.get('email');
-    const password = formData.get('password')
-    const name = formData.get('name')
+    const email = formData.get("email");
+    const password = formData.get("password");
+    const name = formData.get("name");
     const userInfo = {
       name,
       email,
-      password
-    }
-    console.log(userInfo)
-    e.target.reset()
-  }
+      password,
+    };
+    console.log(userInfo);
+
+    createUser(email, password)
+      .then((result) => {
+        e.target.reset();
+        console.log(result);
+        navigate("/login")
+      })
+      .catch((error) => console.log(error));
+  };
   return (
     <div className="hero min-h-screen bg-base-200">
       <div className="hero-content w-full flex-col lg:flex-row">
         <div className="text-center w-full lg:text-left">
           <h1 className="text-5xl font-bold">Register now!</h1>
-          <p className="py-6">
-            Get exciting offers.
-          </p>
+          <p className="py-6">Get exciting offers.</p>
         </div>
         <div className="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
           <form onSubmit={handleSubmit} className="card-body">
-          <div className="form-control">
+            <div className="form-control">
               <label className="label">
                 <span className="label-text">Name</span>
               </label>
@@ -66,7 +76,10 @@ export default function SignUp() {
             <div className="form-control mt-6">
               <button className="btn btn-primary">Sign Up</button>
             </div>
-            <p>Already have an account? <NavLink to='/login' >Log In here.</NavLink></p>
+            <p>
+              Already have an account?{" "}
+              <NavLink to="/login">Log In here.</NavLink>
+            </p>
           </form>
         </div>
       </div>

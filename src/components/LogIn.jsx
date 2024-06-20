@@ -1,19 +1,30 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import React, { useContext } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
+import { AuthContext } from "../providers/AuthProvider";
 
 export default function LogIn() {
-  const handleSubmit = e => {
+  const navigate = useNavigate();
+  const { userSignIn, user, setUser, loading } = useContext(AuthContext);
+
+  const handleSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
-    const email = formData.get('email');
-    const password = formData.get('password')
+    const email = formData.get("email");
+    const password = formData.get("password");
     const userInfo = {
       email,
-      password
-    }
-    console.log(userInfo)
-    e.target.reset()
-  }
+      password,
+    };
+    console.log(userInfo);
+
+    userSignIn(email, password)
+      .then((result) => {
+        console.log(result);
+        e.target.reset();
+        navigate("/")
+      })
+      .catch((error) => console.log(error));
+  };
   return (
     <div className="hero min-h-screen bg-base-200">
       <div className="hero-content flex-col lg:flex-row-reverse">
@@ -57,7 +68,10 @@ export default function LogIn() {
             <div className="form-control mt-6">
               <button className="btn btn-primary">Login</button>
             </div>
-            <p>Don't have an account? <NavLink to='/signup' >Register here!</NavLink></p>
+            <p>
+              Don't have an account?{" "}
+              <NavLink to="/signup">Register here!</NavLink>
+            </p>
           </form>
         </div>
       </div>
