@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { NavLink } from "react-router-dom";
 
 export default function Products() {
   const [products, setProducts] = useState([]);
@@ -41,7 +42,9 @@ export default function Products() {
               </div>
               <div className="card-actions justify-around items-center">
                 <button className="btn btn-primary">Details</button>
-                <button onClick={()=>{handleUpdateClick(product._id)}} className="btn btn-primary">Update</button>
+                <button className="btn btn-primary">
+                  <NavLink to={`/products/${product._id}`}>Update</NavLink>
+                </button>
                 <button onClick={()=>{handleDeleteClick(product._id)}} className="btn btn-primary">Delete</button>
               </div>
             </div>

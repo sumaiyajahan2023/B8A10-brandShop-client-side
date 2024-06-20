@@ -11,6 +11,7 @@ import MyCart from './components/MyCart.jsx';
 import AddProduct from './components/AddProduct.jsx';
 import LogIn from './components/LogIn.jsx';
 import SignUp from './components/SignUp.jsx';
+import EditPage from './components/EditPage.jsx';
 
 const router = createBrowserRouter([
   {
@@ -36,6 +37,11 @@ const router = createBrowserRouter([
       {
         path: "/signup",
         element: <SignUp />
+      },
+      {
+        path: "/products/:id",
+        element: <EditPage />,
+        loader: ({params}) => fetch(`http://localhost:5000/products/${params.id}`)
       },
     ]
   },
