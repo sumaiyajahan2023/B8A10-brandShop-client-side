@@ -4,7 +4,7 @@ import { AuthContext } from "../providers/AuthProvider";
 
 export default function LogIn() {
   const navigate = useNavigate();
-  const { userSignIn, user, setUser, loading } = useContext(AuthContext);
+  const { userSignIn, user, setUser, loading, setLoading } = useContext(AuthContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -19,6 +19,8 @@ export default function LogIn() {
 
     userSignIn(email, password)
       .then((result) => {
+        setLoading(false);
+        setUser(result.user)
         console.log(result);
         e.target.reset();
         navigate("/")

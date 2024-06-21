@@ -1,7 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
+import { AuthContext } from "../providers/AuthProvider";
 
 export default function Header() {
+  const { user, setUser, userSignOut } = useContext(AuthContext);
+
+  const handleSignOut = () => {
+    userSignOut()
+      .then(setUser(null))
+      .catch((error) => console.log(error));
+  };
+
   return (
     <div className="navbar bg-base-100">
       <div className="navbar-start">
@@ -45,23 +54,44 @@ export default function Header() {
             </li>
           </ul>
         </div>
-        <NavLink to='/' className="btn btn-ghost text-xl">Electronics</NavLink>
+        <NavLink to="/" className="btn btn-ghost text-xl">
+          Electronics
+        </NavLink>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
           <li>
-            <NavLink to='/' >Home</NavLink>
+            <NavLink to="/">Home</NavLink>
           </li>
           <li>
-            <NavLink to='/add-product' >Add Product</NavLink>
+            <NavLink to="/add-product">Add Product</NavLink>
           </li>
           <li>
-            <NavLink to='/cart' >My Cart</NavLink>
+            <NavLink to="/cart">My Cart</NavLink>
           </li>
         </ul>
       </div>
       <div className="navbar-end">
-        <NavLink to='/login' className="btn">Login</NavLink>
+        {user ? (
+          // <p>{user.email}</p>
+          <div className="dropdown dropdown-hover">
+            <div tabIndex={0} role="button" className="btn m-1">
+              {user.email}
+            </div>
+            <ul
+              tabIndex={0}
+              className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
+            >
+              <li>
+                <button onClick={handleSignOut}>Log Out</button>
+              </li>
+            </ul>
+          </div>
+        ) : (
+          <NavLink to="/login" className="btn">
+            Login
+          </NavLink>
+        )}
       </div>
     </div>
   );
