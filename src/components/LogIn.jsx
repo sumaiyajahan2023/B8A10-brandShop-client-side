@@ -1,31 +1,33 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
 
 export default function LogIn() {
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
-  const { userSignIn, user, setUser, loading, setLoading } = useContext(AuthContext);
+  const { userSignIn, user, setUser, loading, setLoading } =
+    useContext(AuthContext);
+
+  // setLoading(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const email = formData.get("email");
     const password = formData.get("password");
-    const userInfo = {
-      email,
-      password,
-    };
-    console.log(userInfo);
 
     userSignIn(email, password)
       .then((result) => {
         setLoading(false);
-        setUser(result.user)
+        setUser(result.user);
         console.log(result);
         e.target.reset();
-        navigate("/")
+        navigate("/");
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        console.log(error);
+        setError(error);
+      });
   };
   return (
     <div className="hero min-h-screen bg-base-200">
@@ -77,6 +79,14 @@ export default function LogIn() {
           </form>
         </div>
       </div>
+      {loading && <span className="loading loading-spinner text-accent"></span>}
+      {error && (
+        <div className="toast toast-center toast-middle">
+          <div className="alert alert-info">
+            <span>Error Occured!</span>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

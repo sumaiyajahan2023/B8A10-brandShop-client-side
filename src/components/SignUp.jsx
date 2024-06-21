@@ -4,8 +4,9 @@ import { AuthContext } from "../providers/AuthProvider";
 
 export default function SignUp() {
   const navigate = useNavigate();
-  const { createUser } = useContext(AuthContext);
+  const { createUser, setLoading, loading } = useContext(AuthContext);
   // console.log(userInfo)
+  // setLoading(false)
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -13,18 +14,26 @@ export default function SignUp() {
     const email = formData.get("email");
     const password = formData.get("password");
     const name = formData.get("name");
-    const userInfo = {
-      name,
-      email,
-      password,
-    };
-    console.log(userInfo);
 
     createUser(email, password)
       .then((result) => {
+        const createdAt = result.user.metadata.creationTime;
+        const user = { name, email, password, createdAt: createdAt };
+
+        fetch("http://localhost:5000/users", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(user),
+        })
+          .then((res) => res.json())
+          .then((data) => console.log(data));
+
         e.target.reset();
+        setLoading(false);
         console.log(result);
-        navigate("/login")
+        navigate("/login");
       })
       .catch((error) => console.log(error));
   };
@@ -83,6 +92,7 @@ export default function SignUp() {
           </form>
         </div>
       </div>
+      {loading && <span className="loading loading-spinner text-accent"></span>}
     </div>
   );
 }

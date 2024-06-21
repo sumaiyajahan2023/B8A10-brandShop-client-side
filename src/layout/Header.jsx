@@ -64,7 +64,11 @@ export default function Header() {
             <NavLink to="/">Home</NavLink>
           </li>
           <li>
-            <NavLink to="/add-product">Add Product</NavLink>
+            {user ? (
+              <NavLink to="/add-product">Add Product</NavLink>
+            ) : (
+              <NavLink to="/login">Add Product</NavLink>
+            )}
           </li>
           <li>
             <NavLink to="/cart">My Cart</NavLink>
