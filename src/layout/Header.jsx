@@ -36,21 +36,22 @@ export default function Header() {
             className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
           >
             <li>
-              <a>Item 1</a>
+              <NavLink to="/">Home</NavLink>
             </li>
             <li>
               <a>Parent</a>
               <ul className="p-2">
                 <li>
-                  <a>Submenu 1</a>
+                  {user ? (
+                    <NavLink to="/add-product">Add Product</NavLink>
+                  ) : (
+                    <NavLink to="/login">Add Product</NavLink>
+                  )}
                 </li>
                 <li>
-                  <a>Submenu 2</a>
+                  <NavLink to="/cart">My Cart</NavLink>
                 </li>
               </ul>
-            </li>
-            <li>
-              <a>Item 3</a>
             </li>
           </ul>
         </div>

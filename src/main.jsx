@@ -40,7 +40,7 @@ const router = createBrowserRouter([
         path: "/products/:id",
         element: <EditPage />,
         loader: ({ params }) =>
-          fetch(`http://https://b8a10-brand-shop-server-side-l9yw.vercel.app/products/${params.id}`),
+          fetch(`https://b8a10-brand-shop-server-side-l9yw.vercel.app/products/${params.id}`),
       },
     ],
   },
