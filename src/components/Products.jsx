@@ -24,7 +24,7 @@ export default function Products() {
   return (
     <div className="flex flex-col items-center justify-center p-5">
       <h2 className="text-5xl font-bold">See our product catalog!</h2>
-      <div className="grid grid-cols-3 gap-3 py-5">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-3 py-5">
         {products.map((product, index) => (
           <div className="card w-96 bg-base-100 shadow-xl" key={index}>
             <figure className="h-2/3">
