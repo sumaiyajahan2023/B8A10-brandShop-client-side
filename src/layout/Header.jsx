@@ -39,19 +39,14 @@ export default function Header() {
               <NavLink to="/">Home</NavLink>
             </li>
             <li>
-              <a>Parent</a>
-              <ul className="p-2">
-                <li>
-                  {user ? (
-                    <NavLink to="/add-product">Add Product</NavLink>
-                  ) : (
-                    <NavLink to="/login">Add Product</NavLink>
-                  )}
-                </li>
-                <li>
-                  <NavLink to="/cart">My Cart</NavLink>
-                </li>
-              </ul>
+              {user ? (
+                <NavLink to="/add-product">Add Product</NavLink>
+              ) : (
+                <NavLink to="/login">Add Product</NavLink>
+              )}
+            </li>
+            <li>
+              <NavLink to="/cart">My Cart</NavLink>
             </li>
           </ul>
         </div>
