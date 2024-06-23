@@ -24,7 +24,7 @@ export default function EditPage({ params }) {
       updatedRating,
     };
 
-    fetch(`http://localhost:5000/products/${_id}`, {
+    fetch(`http://https://b8a10-brand-shop-server-side-l9yw.vercel.app/products/${_id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",

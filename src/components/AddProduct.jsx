@@ -19,7 +19,7 @@ export default function AddProduct() {
       rating,
     };
 
-    fetch("http://localhost:5000/products", {
+    fetch("http://https://b8a10-brand-shop-server-side-l9yw.vercel.app/products", {
       method: "POST",
       headers: {
         "content-type": "application/json",

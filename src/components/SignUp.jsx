@@ -20,7 +20,7 @@ export default function SignUp() {
         const createdAt = result.user.metadata.creationTime;
         const user = { name, email, password, createdAt: createdAt };
 
-        fetch("http://localhost:5000/users", {
+        fetch("http://https://b8a10-brand-shop-server-side-l9yw.vercel.app/users", {
           method: "POST",
           headers: {
             "content-type": "application/json",
