@@ -5,7 +5,7 @@ export default function Products() {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    fetch("http://https://b8a10-brand-shop-server-side-l9yw.vercel.app/products")
+    fetch("https://b8a10-brand-shop-server-side-l9yw.vercel.app/products")
       .then((res) => res.json())
       .then((data) => {
         setProducts(data);
@@ -15,7 +15,7 @@ export default function Products() {
 
   const handleDeleteClick = (_id) => {
     console.log(_id)
-    fetch(`http://https://b8a10-brand-shop-server-side-l9yw.vercel.app/products/${_id}`,{
+    fetch(`https://b8a10-brand-shop-server-side-l9yw.vercel.app/products/${_id}`,{
       method: 'DELETE'
     })
     .then(res=>res.json())
